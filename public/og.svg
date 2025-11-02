@@ -1,0 +1,7 @@
+<!-- Open Graph preview image -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+  <rect width="100%" height="100%" fill="#0B0F1A"/>
+  <text x="60" y="180" fill="#fff" font-size="72" font-family="Inter, Arial, sans-serif">Devin Carmichael</text>
+  <text x="60" y="260" fill="#9BA3AF" font-size="38" font-family="Inter, Arial, sans-serif">Cloud • Software • Intelligence</text>
+  <text x="60" y="360" fill="#A7F3D0" font-size="28" font-family="Inter, Arial, sans-serif">Selected Projects & Case Studies</text>
+</svg>

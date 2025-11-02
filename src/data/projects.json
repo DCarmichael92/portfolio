@@ -1,0 +1,44 @@
+[
+  {
+    "name": "AWS Lex + RAG Troubleshooting Chatbot",
+    "status": "completed",
+    "description": "Automates diagnostics for cluster events using Amazon Lex and Retrieval-Augmented Generation.",
+    "stack": ["AWS", "Lex", "Lambda", "OpenSearch", "S3", "CloudFront", "IAM"],
+    "tags": ["cloud", "ai", "observability"],
+    "year": 2025,
+    "impact": "Reduced triage time vs. manual playbooks"
+  },
+  {
+    "name": "AMI Hardening Pipeline",
+    "status": "completed",
+    "description": "EC2 Image Builder + Packer to produce hardened AMIs with automated validations and distro pipeline.",
+    "stack": ["EC2 Image Builder", "Packer", "EC2", "IAM"],
+    "tags": ["security", "automation"],
+    "year": 2025,
+    "impact": "Standardized images for faster, safer deploys"
+  },
+  {
+    "name": "Secure CI/CD Demo",
+    "status": "in-progress",
+    "description": "Containerized microservice with least-privilege IAM and gated deployments (preview → prod).",
+    "stack": ["Docker", "CI/CD", "AWS"],
+    "tags": ["devsecops"],
+    "year": 2025
+  },
+  {
+    "name": "Angular World Map Viewer",
+    "status": "completed",
+    "description": "Clickable SVG world map that fetches country data via HTTP.",
+    "stack": ["Angular", "TypeScript", "World Bank API"],
+    "tags": ["frontend", "data-viz"],
+    "year": 2025
+  },
+  {
+    "name": "Shady Rest Hotel",
+    "status": "in-progress",
+    "description": "Full-stack booking app: Spring Boot (Java) + Angular + PostgreSQL with Docker Compose.",
+    "stack": ["Spring Boot", "Angular", "PostgreSQL", "Docker"],
+    "tags": ["fullstack", "java"],
+    "year": 2025
+  }
+]

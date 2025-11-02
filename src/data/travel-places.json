@@ -1,0 +1,212 @@
+[
+  {
+    "slug": "nice-france",
+    "name": "Nice, France",
+    "country": "France",
+    "lat": 43.7102,
+    "lng": 7.262,
+    "year": 2016,
+    "visits": 1,
+    "images": [
+      "https://source.unsplash.com/featured/1200x800?nice,france,promenade",
+      "https://source.unsplash.com/featured/1200x800?cote-d%27azur,beach"
+    ],
+    "notes": "Promenade des Anglais, Mediterranean views, and perfect espresso."
+  },
+  {
+    "slug": "monaco",
+    "name": "Monaco",
+    "country": "Monaco",
+    "lat": 43.7384,
+    "lng": 7.4246,
+    "year": 2016,
+    "visits": 1,
+    "images": [
+      "https://source.unsplash.com/featured/1200x800?monaco,harbor",
+      "https://source.unsplash.com/featured/1200x800?montecarlo"
+    ],
+    "notes": "Harbor, supercars, tiny country—huge flex."
+  },
+  {
+    "slug": "cancun-mexico",
+    "name": "Cancun, Mexico",
+    "country": "Mexico",
+    "lat": 21.1619,
+    "lng": -86.8515,
+    "year": 2018,
+    "visits": 3,
+    "images": [
+      "https://source.unsplash.com/featured/1200x800?cancun,beach",
+      "https://source.unsplash.com/featured/1200x800?cancun,resort"
+    ],
+    "notes": "Return trip magnet. Turquoise water + tacos. 3×."
+  },
+  {
+    "slug": "dominican-republic",
+    "name": "Dominican Republic",
+    "country": "Dominican Republic",
+    "lat": 18.7357,
+    "lng": -70.1627,
+    "year": 2017,
+    "visits": 1,
+    "images": [
+      "https://source.unsplash.com/featured/1200x800?dominican,beach",
+      "https://source.unsplash.com/featured/1200x800?punta-cana"
+    ],
+    "notes": "Warm water, friendliest locals, great food."
+  },
+  {
+    "slug": "jamaica",
+    "name": "Jamaica",
+    "country": "Jamaica",
+    "lat": 18.1096,
+    "lng": -77.2975,
+    "year": 2019,
+    "visits": 1,
+    "images": [
+      "https://source.unsplash.com/featured/1200x800?jamaica,beach",
+      "https://source.unsplash.com/featured/1200x800?jamaica,blue-holes"
+    ],
+    "notes": "Reggae, waterfalls, jerk chicken. Enough said."
+  },
+  {
+    "slug": "los-angeles",
+    "name": "Los Angeles, CA",
+    "country": "USA",
+    "lat": 34.0522,
+    "lng": -118.2437,
+    "year": 2021,
+    "visits": 1,
+    "images": [
+      "https://source.unsplash.com/featured/1200x800?los-angeles,skyline",
+      "https://source.unsplash.com/featured/1200x800?griffith,observatory"
+    ],
+    "notes": "Street tacos + views from Griffith."
+  },
+  {
+    "slug": "san-diego",
+    "name": "San Diego, CA",
+    "country": "USA",
+    "lat": 32.7157,
+    "lng": -117.1611,
+    "year": 2021,
+    "visits": 1,
+    "images": [
+      "https://source.unsplash.com/featured/1200x800?san-diego,beach",
+      "https://source.unsplash.com/featured/1200x800?la-jolla"
+    ],
+    "notes": "Sunset cliffs never miss."
+  },
+  {
+    "slug": "miami",
+    "name": "Miami, FL",
+    "country": "USA",
+    "lat": 25.7617,
+    "lng": -80.1918,
+    "year": 2022,
+    "visits": 1,
+    "images": [
+      "https://source.unsplash.com/featured/1200x800?miami,beach",
+      "https://source.unsplash.com/featured/1200x800?miami,art-deco"
+    ],
+    "notes": "Beach day → Cuban coffee → Wynwood murals."
+  },
+  {
+    "slug": "tampa",
+    "name": "Tampa, FL",
+    "country": "USA",
+    "lat": 27.9506,
+    "lng": -82.4572,
+    "year": 2020,
+    "visits": 1,
+    "images": [
+      "https://source.unsplash.com/featured/1200x800?tampa,riverwalk",
+      "https://source.unsplash.com/featured/1200x800?clearwater,florida"
+    ],
+    "notes": "Lived here; sunshine + seafood."
+  },
+  {
+    "slug": "orlando",
+    "name": "Orlando, FL",
+    "country": "USA",
+    "lat": 28.5383,
+    "lng": -81.3792,
+    "year": 2020,
+    "visits": 1,
+    "images": [
+      "https://source.unsplash.com/featured/1200x800?orlando,city",
+      "https://source.unsplash.com/featured/1200x800?orlando,theme-park"
+    ],
+    "notes": "Theme parks + food runs."
+  },
+  {
+    "slug": "baltimore",
+    "name": "Baltimore, MD",
+    "country": "USA",
+    "lat": 39.2904,
+    "lng": -76.6122,
+    "year": 2024,
+    "visits": 1,
+    "images": [
+      "https://source.unsplash.com/featured/1200x800?baltimore,harbor",
+      "https://source.unsplash.com/featured/1200x800?baltimore,city"
+    ],
+    "notes": "Inner Harbor walks + seafood."
+  },
+  {
+    "slug": "afghanistan",
+    "name": "Afghanistan",
+    "country": "Afghanistan",
+    "lat": 33.9391,
+    "lng": 67.7100,
+    "year": 2015,
+    "visits": 1,
+    "images": [
+      "https://source.unsplash.com/featured/1200x800?afghanistan,mountains",
+      "https://source.unsplash.com/featured/1200x800?hindu-kush"
+    ],
+    "notes": "Service. Mountains that humble you."
+  },
+  {
+    "slug": "iraq",
+    "name": "Iraq",
+    "country": "Iraq",
+    "lat": 33.2232,
+    "lng": 43.6793,
+    "year": 2015,
+    "visits": 1,
+    "images": [
+      "https://source.unsplash.com/featured/1200x800?iraq,desert",
+      "https://source.unsplash.com/featured/1200x800?baghdad"
+    ],
+    "notes": "Service. Heat like an anvil."
+  },
+  {
+    "slug": "kuwait",
+    "name": "Kuwait",
+    "country": "Kuwait",
+    "lat": 29.3759,
+    "lng": 47.9774,
+    "year": 2015,
+    "visits": 1,
+    "images": [
+      "https://source.unsplash.com/featured/1200x800?kuwait,city",
+      "https://source.unsplash.com/featured/1200x800?kuwait,towers"
+    ],
+    "notes": "Service. Night cityscapes."
+  },
+  {
+    "slug": "dubai",
+    "name": "Dubai, UAE",
+    "country": "United Arab Emirates",
+    "lat": 25.2048,
+    "lng": 55.2708,
+    "year": 2016,
+    "visits": 1,
+    "images": [
+      "https://source.unsplash.com/featured/1200x800?dubai,skyscraper",
+      "https://source.unsplash.com/featured/1200x800?burj,khalifa"
+    ],
+    "notes": "Futuristic skyline. Everything extra, in a good way."
+  }
+]

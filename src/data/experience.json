@@ -1,0 +1,111 @@
+[
+  {
+    "company": "Peraton",
+    "role": "Cloud Software Engineer",
+    "location": "Fort Meade, MD",
+    "start": "2025-09",
+    "highlights": [
+      "Support DoD cloud apps with Java and AWS in a secure environment.",
+      "Build backend microservices and custom search/analytics on Elasticsearch.",
+      "Operate AWS (Lambda, EC2, S3, IAM) aligned to DoD security protocols.",
+      "Partner with DevSecOps to ship secure CI/CD and containerized deployments (Docker).",
+      "Contribute to real-time ingestion/analysis/visualization for Intelligence Community workloads."
+    ],
+    "tech": ["Java", "AWS", "Elasticsearch", "Docker", "CI/CD"],
+    "links": []
+  },
+  {
+    "company": "Amazon Web Services (AWS)",
+    "role": "Cloud Support Engineer",
+    "location": "Herndon, VA",
+    "start": "2025-05",
+    "end": "2025-09",
+    "highlights": [
+      "Advised customers across EC2, S3, Lambda, RDS, IAM, DynamoDB.",
+      "Shipped a Lex + RAG chatbot automating troubleshooting for cluster events.",
+      "Built/deployed AWS apps across the SDLC; wrote unit tests and debugged issues.",
+      "Hardened AMIs with EC2 Image Builder and Packer; automated infra tasks."
+    ],
+    "tech": ["AWS", "EC2", "Lambda", "RDS", "DynamoDB", "Lex", "Packer"],
+    "links": []
+  },
+  {
+    "company": "Prescient Edge",
+    "role": "Cybersecurity Intelligence Analyst",
+    "location": "Washington, D.C.",
+    "start": "2024-10",
+    "end": "2025-05",
+    "highlights": [
+      "Analyzed cybersecurity data; authored reports for technical & non-technical audiences.",
+      "Reviewed/edited technical documentation for accuracy and clarity.",
+      "Used Palantir to visualize data and support decisions; educated stakeholders.",
+      "Maintained thorough documentation of analysis processes and findings."
+    ],
+    "tech": ["Palantir", "Cyber Analytics"],
+    "links": []
+  },
+  {
+    "company": "ADP",
+    "role": "Account Manager",
+    "location": "Remote",
+    "start": "2024-05",
+    "end": "2024-10",
+    "highlights": [
+      "Prospected B2B clients; achieved 100% quota; tracked engagement in Salesforce."
+    ],
+    "tech": ["Salesforce"],
+    "links": []
+  },
+  {
+    "company": "West Shore Home & Honest Abe Roofing",
+    "role": "In-Home Sales Representative / Project Manager",
+    "location": "Tampa, FL",
+    "start": "2020-10",
+    "end": "2024-04",
+    "highlights": [
+      "Managed 200+ home-improvement projects end-to-end.",
+      "Consistently exceeded sales targets while ensuring compliance."
+    ],
+    "tech": [],
+    "links": []
+  },
+  {
+    "company": "CACI",
+    "role": "All-Source Intelligence Analyst",
+    "location": "Aberdeen Proving Ground, MD",
+    "start": "2019-12",
+    "end": "2020-06",
+    "highlights": [
+      "Built training/briefings on enemy UAS; led technical research.",
+      "Used SIPR, JWICS, MARS for classified analysis and dissemination."
+    ],
+    "tech": ["SIPR", "JWICS", "MARS"],
+    "links": []
+  },
+  {
+    "company": "Mission Services Inc.",
+    "role": "All-Source Targeting Analyst",
+    "location": "Charlottesville, VA",
+    "start": "2017-11",
+    "end": "2019-12",
+    "highlights": [
+      "Led SIGINT/HUMINT targeting with Palantir/DataXplorer.",
+      "Fused SIGINT/HUMINT/ELINT/IMINT/GEOINT/OSINT for special operations briefings."
+    ],
+    "tech": ["Palantir", "DataXplorer"],
+    "links": []
+  },
+  {
+    "company": "United States Marine Corps",
+    "role": "0231 Intelligence Specialist",
+    "location": "Camp Pendleton, CA",
+    "start": "2012-11",
+    "end": "2017-11",
+    "highlights": [
+      "Supported OIR targeting; led SIGINT/HUMINT analysis tracking ISIS leadership.",
+      "Briefed commanders on ISR, collection posture, and BDA; led 15 junior analysts."
+    ],
+    "tech": ["ISR"],
+    "links": []
+  }
+]

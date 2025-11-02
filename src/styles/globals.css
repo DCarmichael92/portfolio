@@ -1,0 +1,28 @@
+/* Tailwind v4: single import */
+@import "tailwindcss";
+
+:root { color-scheme: light dark; }
+html, body { height: 100%; }
+
+/* Accessible focus */
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Subtle cloud mesh background */
+body {
+  background:
+    radial-gradient(1200px 600px at 20% 10%, rgba(16,185,129,0.10), transparent 60%),
+    radial-gradient(900px 500px at 80% 0%, rgba(59,130,246,0.10), transparent 60%),
+    radial-gradient(900px 500px at 50% 80%, rgba(244,114,182,0.08), transparent 60%),
+    #000;
+  color: white;
+}
+
+/* Floating animation */
+@keyframes floaty {
+  0%,100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+.floaty { animation: floaty 6s ease-in-out infinite; }
