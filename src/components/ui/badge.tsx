@@ -1,13 +1,22 @@
-// Lightweight badge for tech tags and statuses.
 import * as React from "react";
+import { cn } from "@/lib/utils";
 
-export function Badge({ className = "", ...props }: React.ComponentProps<"span">) {
+export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+  variant?: "default" | "outline";
+}
+
+export function Badge({ className, variant = "default", ...props }: BadgeProps) {
+  const styles =
+    variant === "outline"
+      ? "border border-white/20 text-white/90"
+      : "bg-white/10 border border-white/10 text-white";
   return (
     <span
-      className={
-        "inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium border-white/15 bg-white/10 " +
+      className={cn(
+        "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs",
+        styles,
         className
-      }
+      )}
       {...props}
     />
   );

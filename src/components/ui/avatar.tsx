@@ -1,53 +1,45 @@
-"use client"
+// Zero-dependency Avatar shim to avoid @radix-ui/react-avatar.
+// Usage-compatible with shadcn's Avatar, AvatarImage, AvatarFallback.
+import * as React from "react";
 
-import * as React from "react"
-import * as AvatarPrimitive from "@radix-ui/react-avatar"
+type DivProps = React.ComponentProps<"div"> & { asChild?: boolean };
 
-import { cn } from "@/lib/utils"
-
-function Avatar({
-  className,
-  ...props
-}: React.ComponentProps<typeof AvatarPrimitive.Root>) {
+export function Avatar({ className = "", style, children, ...props }: DivProps) {
   return (
-    <AvatarPrimitive.Root
-      data-slot="avatar"
-      className={cn(
-        "relative flex size-8 shrink-0 overflow-hidden rounded-full",
-        className
-      )}
+    <div
+      className={`inline-flex h-10 w-10 overflow-hidden rounded-full bg-white/10 ring-1 ring-white/15 ${className}`}
+      style={style}
       {...props}
-    />
-  )
+    >
+      {children}
+    </div>
+  );
 }
 
-function AvatarImage({
-  className,
-  ...props
-}: React.ComponentProps<typeof AvatarPrimitive.Image>) {
+type ImgProps = React.ComponentProps<"img">;
+export function AvatarImage({ className = "", alt = "Avatar", ...props }: ImgProps) {
   return (
-    <AvatarPrimitive.Image
-      data-slot="avatar-image"
-      className={cn("aspect-square size-full", className)}
+    <img
+      alt={alt}
+      className={`h-full w-full object-cover ${className}`}
+      loading="lazy"
       {...props}
+      onError={(e) => {
+        // Hide broken images so fallback shows
+        (e.currentTarget as HTMLImageElement).style.display = "none";
+      }}
     />
-  )
+  );
 }
 
-function AvatarFallback({
-  className,
-  ...props
-}: React.ComponentProps<typeof AvatarPrimitive.Fallback>) {
+type FallbackProps = React.ComponentProps<"div">;
+export function AvatarFallback({ className = "", children, ...props }: FallbackProps) {
   return (
-    <AvatarPrimitive.Fallback
-      data-slot="avatar-fallback"
-      className={cn(
-        "bg-muted flex size-full items-center justify-center rounded-full",
-        className
-      )}
+    <div
+      className={`flex h-full w-full items-center justify-center text-xs text-gray-300 ${className}`}
       {...props}
-    />
-  )
+    >
+      {children ?? "?"}
+    </div>
+  );
 }
-
-export { Avatar, AvatarImage, AvatarFallback }

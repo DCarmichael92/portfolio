@@ -1,28 +1,34 @@
-"use client"
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
-import * as React from "react"
-import * as SeparatorPrimitive from "@radix-ui/react-separator"
+export interface SeparatorProps extends React.HTMLAttributes<HTMLDivElement> {
+  orientation?: "horizontal" | "vertical";
+  decorative?: boolean;
+}
 
-import { cn } from "@/lib/utils"
-
-function Separator({
-  className,
+/**
+ * Zero-dependency Separator shim (replaces @radix-ui/react-separator).
+ * - Matches common props (orientation, decorative, className)
+ * - Renders an accessible separator role with sensible defaults
+ */
+export function Separator({
   orientation = "horizontal",
-  decorative = true,
+  decorative = false,
+  className,
   ...props
-}: React.ComponentProps<typeof SeparatorPrimitive.Root>) {
+}: SeparatorProps) {
+  const isVertical = orientation === "vertical";
   return (
-    <SeparatorPrimitive.Root
-      data-slot="separator"
-      decorative={decorative}
-      orientation={orientation}
+    <div
+      role="separator"
+      aria-orientation={isVertical ? "vertical" : "horizontal"}
+      aria-hidden={decorative ? true : undefined}
       className={cn(
-        "bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px",
+        "bg-white/15",
+        isVertical ? "mx-2 h-6 w-px" : "my-3 h-px w-full",
         className
       )}
       {...props}
     />
-  )
+  );
 }
-
-export { Separator }
