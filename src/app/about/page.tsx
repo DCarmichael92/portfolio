@@ -64,15 +64,29 @@ export default function AboutPage() {
           </div>
 
           {/* Local banner, smaller height */}
-          <div className="mt-5 relative h-32 md:h-40 overflow-hidden rounded-xl">
+          <div className="mt-5 overflow-hidden rounded-xl relative">
+          {/* blurred background */}
+           <div className="absolute inset-0 opacity-40">
             <Image
-              src="/images/travel/nice-france-1.jpg"
-              alt="Coastal view in Nice, France"
-              width={1600}
-              height={533} // ≈ 3:1 aspect
-              className="h-auto w-full object-cover"
+              src="/images/travel/nice-france-2.jpg"
+              alt=""
+              fill
+              className="object-cover blur-xl scale-125"
+              aria-hidden
             />
           </div>
+
+          {/* actual visible photo */}
+          <div className="relative" style={{ aspectRatio: "3 / 1" }}>
+            <Image
+              src="/images/travel/nice-france-2.jpg"
+              alt="Coastal view in Nice, France"
+              fill
+              className="object-contain"
+              sizes="100vw"
+            />
+          </div>
+        </div>
         </div>
       </section>
 
