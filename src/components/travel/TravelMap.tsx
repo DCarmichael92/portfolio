@@ -1,3 +1,4 @@
+// src/components/travel/TravelMap.tsx
 "use client";
 
 import { useMemo, useRef, useState, useEffect } from "react";
@@ -6,7 +7,6 @@ import { Lightbox } from "./Lightbox";
 
 /** Equirectangular projection (lat, lng) -> (x,y) */
 function project(lat: number, lng: number, w: number, h: number) {
-  // Clamp latitude to avoid NaN
   const clampedLat = Math.max(-89.999, Math.min(89.999, lat));
   const x = ((lng + 180) / 360) * w;
   const y = ((90 - clampedLat) / 180) * h;
@@ -31,7 +31,7 @@ export function TravelMap() {
   const [active, setActive] = useState<Place | null>(null);
   const places = useMemo(() => placesData as Place[], []);
 
-  // Keep a 2:1 aspect ratio responsive to width
+  // Keep ~2:1 aspect responsive
   useEffect(() => {
     function update() {
       if (!containerRef.current) return;
@@ -45,31 +45,38 @@ export function TravelMap() {
     return () => ro.disconnect();
   }, []);
 
+  // If your SVG has dark lines on a dark background, set this to true to invert it.
+  const INVERT_MAP = false;
+
   return (
     <>
       <div
         ref={containerRef}
-        className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-black/60"
+        className="relative w-full overflow-hidden rounded-2xl border border-white/10"
         style={{ height: size.h }}
         aria-label="World map with visited locations"
       >
+        {/* High-contrast neutral backdrop */}
+        <div className="absolute inset-0 bg-[#0b1220]" />
+
         {/* SVG background (your uploaded map) */}
         <img
           src="/maps/world-map.svg"
           alt="World map"
-          className="absolute inset-0 h-full w-full object-contain md:object-cover opacity-95"
+          className={[
+            "absolute inset-0 h-full w-full object-contain md:object-cover",
+            "opacity-100 mix-blend-screen", // make light strokes pop over dark bg
+            INVERT_MAP ? "invert" : "",
+          ].join(" ")}
+          style={{
+            // gentle punch-up; tweak as needed
+            filter:
+              "contrast(1.35) brightness(1.25) saturate(1.1) drop-shadow(0 0 2px rgba(255,255,255,0.35))",
+          }}
           loading="lazy"
-          referrerPolicy="no-referrer"
         />
 
-        {/* Optional subtle glow overlay for cloud vibe */}
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute left-[15%] top-[10%] h-[60%] w-[40%] rounded-full bg-emerald-400/10 blur-3xl" />
-          <div className="absolute right-[10%] top-[5%] h-[50%] w-[35%] rounded-full bg-cyan-300/10 blur-3xl" />
-          <div className="absolute left-[30%] bottom-[5%] h-[55%] w-[45%] rounded-full bg-indigo-400/10 blur-3xl" />
-        </div>
-
-        {/* Pins */}
+        {/* Pins on top */}
         {places.map((p) => {
           const { x, y } = project(p.lat, p.lng, size.w, size.h);
           const hasImgs = Array.isArray(p.images) && p.images.length > 0;
@@ -78,7 +85,7 @@ export function TravelMap() {
               key={p.slug}
               title={`${p.name}${hasImgs ? ` (${p.visits}×)` : ""}`}
               className="absolute -translate-x-1/2 -translate-y-1/2"
-              style={{ left: x, top: y }}
+              style={{ left: x, top: y, zIndex: 2 }}
               onClick={() => hasImgs && setActive(p)}
               aria-disabled={!hasImgs}
             >
@@ -92,9 +99,9 @@ export function TravelMap() {
         })}
       </div>
 
-      {/* Lightbox only when we have images */}
+      {/* Lightbox only when images exist */}
       <Lightbox
-        open={!!active && Array.isArray(active.images) && active.images.length > 0}
+        open={!!active && Array.isArray(active?.images) && active.images.length > 0}
         onClose={() => setActive(null)}
         title={active ? `${active.name} — ${active.country}` : ""}
         images={active?.images ?? []}
