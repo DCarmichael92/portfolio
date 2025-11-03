@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 
 type Hobby = { name: string; blurb: string; image?: string };
@@ -7,13 +8,15 @@ export function HobbyCard({ hobby }: { hobby: Hobby }) {
   return (
     <article className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur">
       {hobby.image && (
-        <div className="p-0">
+        // Fixed visual size for all cards: 4:3 frame
+        <div className="relative" style={{ aspectRatio: "4 / 3" }}>
+          {/* object-cover keeps the frame consistent (may crop edges slightly) */}
           <Image
             src={hobby.image}
             alt={hobby.name}
-            width={800}          // explicit size avoids layout issues
-            height={600}
-            className="h-auto w-full object-cover" // scales nicely
+            fill
+            sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+            className="object-cover"
             priority={false}
           />
         </div>

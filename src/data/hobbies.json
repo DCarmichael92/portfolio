@@ -2,5 +2,5 @@
   { "name": "Golf",   "blurb": "Weekend rounds.", "image": "/images/hobbies/golf-course.jpeg" },
   { "name": "Running","blurb": "5K fun runs.",    "image": "/images/hobbies/5k-run-medals.jpg" },
   { "name": "Cats",   "blurb": "Momo & Aang.","image": "/images/cats/2-cats.jpeg" },
-  { "name": "Happy Couple", "blurb": "My wife and I.","image": "/images/family/me-and-wife-3.jpgg" }
+  { "name": "Happy Couple", "blurb": "My wife and I.","image": "/images/family/me-and-wife-3.jpg" }
 ]
