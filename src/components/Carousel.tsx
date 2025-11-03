@@ -9,13 +9,14 @@ export default function Carousel({
   slides,
   interval = 4000,
   className = "",
-  heightClass = "h-56 md:h-72 lg:h-80", // smaller default
+  heightClass = "h-48 md:h-64 lg:h-72",
+  fit = "contain", // "contain" shows full image without cropping; "cover" crops to fill
 }: {
   slides: Slide[];
   interval?: number;
   className?: string;
-  /** Tailwind height classes applied to the container */
-  heightClass?: string;
+  heightClass?: string; // Tailwind heights applied to the viewport
+  fit?: "contain" | "cover";
 }) {
   const [i, setI] = useState(0);
   const timer = useRef<number | null>(null);
@@ -37,6 +38,8 @@ export default function Carousel({
 
   if (!slides?.length) return null;
 
+  const objFit = fit === "cover" ? "object-cover" : "object-contain";
+
   return (
     <div
       className={`relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur ${heightClass} ${className}`}
@@ -48,16 +51,28 @@ export default function Carousel({
         <div
           key={idx}
           aria-hidden={idx !== i}
-          className={`absolute inset-0 transition-opacity duration-500 ${
-            idx === i ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 transition-opacity duration-500 ${idx === i ? "opacity-100" : "opacity-0"}`}
         >
+          {/* Blurred backdrop to avoid letterbox look when using object-contain */}
+          <div className="absolute inset-0">
+            <Image
+              src={s.src}
+              alt=""
+              aria-hidden
+              fill
+              sizes="100vw"
+              className="object-cover blur-lg scale-110 opacity-40"
+              priority={idx === 0}
+            />
+          </div>
+
+          {/* Foreground image: contain to avoid cropping */}
           <Image
             src={s.src}
             alt={s.alt}
             fill
             sizes="100vw"
-            className="object-cover"
+            className={`${objFit} object-center`}
             priority={idx === 0}
           />
         </div>
@@ -86,9 +101,7 @@ export default function Carousel({
                 key={idx}
                 aria-label={`Go to slide ${idx + 1}`}
                 onClick={() => go(idx)}
-                className={`h-1.5 w-1.5 cursor-pointer rounded-full ${
-                  idx === i ? "bg-white" : "bg-white/40"
-                }`}
+                className={`h-1.5 w-1.5 cursor-pointer rounded-full ${idx === i ? "bg-white" : "bg-white/40"}`}
               />
             ))}
           </div>
