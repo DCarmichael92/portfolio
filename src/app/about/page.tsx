@@ -22,14 +22,14 @@ export default function AboutPage() {
         Golf, running, family time, and travel keep me balanced and curious.
       </p>
 
-      {/* Rotating photo carousel (local images only) */}
+      {/* Smaller carousel */}
       <div className="mt-6">
-        <Carousel slides={slides} aspect="16/9" />
+        <Carousel slides={slides} heightClass="h-48 md:h-64 lg:h-72" />
       </div>
 
       {/* Personal + Travel */}
       <section className="mt-10 grid gap-6 md:grid-cols-2">
-        {/* Personal section */}
+        {/* Personal */}
         <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
           <h2 className="text-xl font-medium">A bit about me</h2>
           <ul className="mt-3 space-y-2 text-sm text-gray-200">
@@ -45,51 +45,38 @@ export default function AboutPage() {
           </p>
 
           <div className="mt-6 space-x-4 text-sm">
-            <a className="underline" href="mailto:devin.a.carmichael@gmail.com">
-              Email
-            </a>
-            <a className="underline" href="https://www.linkedin.com/in/devin-carmichael" target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
-            <a className="underline" href="https://github.com/DCarmichael92" target="_blank" rel="noreferrer">
-              GitHub
-            </a>
+            <a className="underline" href="mailto:devin.a.carmichael@gmail.com">Email</a>
+            <a className="underline" href="https://www.linkedin.com/in/devin-carmichael" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a className="underline" href="https://github.com/DCarmichael92" target="_blank" rel="noreferrer">GitHub</a>
           </div>
         </div>
 
-        {/* Travel section */}
+        {/* Travel */}
         <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
           <h2 className="text-xl font-medium">Places I’ve been</h2>
-          <p className="mt-1 text-sm text-gray-400">
-            Travel keeps me curious and grounded. A few favorites:
-          </p>
-
+          <p className="mt-1 text-sm text-gray-400">Travel keeps me curious and grounded. A few favorites:</p>
           <div className="mt-4 flex flex-wrap gap-2">
             {(travel as string[]).map((loc) => (
-              <span
-                key={loc}
-                className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-gray-200"
-              >
+              <span key={loc} className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-gray-200">
                 {loc}
               </span>
             ))}
           </div>
 
-          {/* Local banner image instead of external source */}
-          <div className="mt-5 overflow-hidden rounded-xl relative" style={{ aspectRatio: "3/1" }}>
+          {/* Local banner, smaller height */}
+          <div className="mt-5 relative h-32 md:h-40 overflow-hidden rounded-xl">
             <Image
               src="/images/travel/nice-france-2.jpg"
               alt="Coastal view in Nice, France"
               fill
               sizes="100vw"
               className="object-cover"
-              priority={false}
             />
           </div>
         </div>
       </section>
 
-      {/* Hobby cards (keeps placeholder fallback if no image in JSON) */}
+      {/* Hobbies (image only when provided) */}
       <section className="mt-10">
         <h2 className="text-xl font-medium">Hobbies</h2>
         <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">

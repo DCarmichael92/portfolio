@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 type Slide = { src: string; alt: string };
@@ -9,12 +9,13 @@ export default function Carousel({
   slides,
   interval = 4000,
   className = "",
-  aspect = "16/9",
+  heightClass = "h-56 md:h-72 lg:h-80", // smaller default
 }: {
   slides: Slide[];
   interval?: number;
   className?: string;
-  aspect?: `${number}/${number}` | string;
+  /** Tailwind height classes applied to the container */
+  heightClass?: string;
 }) {
   const [i, setI] = useState(0);
   const timer = useRef<number | null>(null);
@@ -24,10 +25,9 @@ export default function Carousel({
   const next = () => go(i + 1);
   const prev = () => go(i - 1);
 
-  // autoplay
   useEffect(() => {
     if (count <= 1) return;
-    timer.current && window.clearInterval(timer.current);
+    if (timer.current) window.clearInterval(timer.current);
     timer.current = window.setInterval(next, interval);
     return () => {
       if (timer.current) window.clearInterval(timer.current);
@@ -35,26 +35,16 @@ export default function Carousel({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i, count, interval]);
 
-  // keyboard arrows
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "ArrowRight") next();
-      if (e.key === "ArrowLeft") prev();
-    }
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  });
-
-  const items = useMemo(() => slides, [slides]);
+  if (!slides?.length) return null;
 
   return (
     <div
-      className={`relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur ${className}`}
-      style={{ aspectRatio: aspect }}
-      onMouseEnter={() => timer.current && window.clearInterval(timer.current)}
+      className={`relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur ${heightClass} ${className}`}
+      onMouseEnter={() => timer.current && window.clearInterval(timer.current!)}
       onMouseLeave={() => (timer.current = window.setInterval(next, interval))}
     >
-      {items.map((s, idx) => (
+      {/* Slides */}
+      {slides.map((s, idx) => (
         <div
           key={idx}
           aria-hidden={idx !== i}
@@ -73,30 +63,30 @@ export default function Carousel({
         </div>
       ))}
 
-      {/* controls */}
+      {/* Controls */}
       {count > 1 && (
         <>
           <button
             aria-label="Previous slide"
             onClick={prev}
-            className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-black/40 px-3 py-1 text-white hover:bg-black/60"
+            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 px-2.5 py-1 text-white hover:bg-black/60"
           >
             ‹
           </button>
           <button
             aria-label="Next slide"
             onClick={next}
-            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-black/40 px-3 py-1 text-white hover:bg-black/60"
+            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 px-2.5 py-1 text-white hover:bg-black/60"
           >
             ›
           </button>
           <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-2">
-            {items.map((_, idx) => (
+            {slides.map((_, idx) => (
               <span
                 key={idx}
                 aria-label={`Go to slide ${idx + 1}`}
                 onClick={() => go(idx)}
-                className={`h-2 w-2 cursor-pointer rounded-full ${
+                className={`h-1.5 w-1.5 cursor-pointer rounded-full ${
                   idx === i ? "bg-white" : "bg-white/40"
                 }`}
               />
