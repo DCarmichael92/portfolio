@@ -68,7 +68,7 @@ export default function AboutPage() {
           {/* blurred background */}
            <div className="absolute inset-0 opacity-40">
             <Image
-              src="/images/travel/nice-france-2.jpg"
+              src="/images/travel/nice-france-1.jpg"
               alt=""
               fill
               className="object-cover blur-xl scale-125"
@@ -79,7 +79,7 @@ export default function AboutPage() {
           {/* actual visible photo */}
           <div className="relative" style={{ aspectRatio: "3 / 1" }}>
             <Image
-              src="/images/travel/nice-france-2.jpg"
+              src="/images/travel/nice-france-1.jpg"
               alt="Coastal view in Nice, France"
               fill
               className="object-contain"
