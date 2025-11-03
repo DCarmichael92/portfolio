@@ -1,45 +1,57 @@
-// About page with personal section, hobby image grid, and travel chips.
+// src/app/about/page.tsx
+import Image from "next/image";
 import hobbies from "@/data/hobbies.json";
 import travel from "@/data/travel.json";
 import { HobbyCard } from "@/components/HobbyCard";
+import Carousel from "@/components/Carousel";
 
 export default function AboutPage() {
-  return (
-    <main className="container mx-auto max-w-5xl px-4 py-10">
-      <h1 className="text-3xl font-semibold">About</h1>
+  const slides = [
+    { src: "/images/hobbies/golf-course.jpeg", alt: "Scenic golf course" },
+    { src: "/images/hobbies/5k-run-medals.jpg", alt: "Rocky Run 5K finisher medals" },
+    { src: "/images/cats/2-cats.jpeg", alt: "Two cats relaxing on a bed" },
+    { src: "/images/family/happy-hour.jpg", alt: "Dinner by the water" },
+    { src: "/images/travel/me-in-monaco.jpg", alt: "Monaco waterfront" },
+    { src: "/images/travel/nice-france-1.jpg", alt: "Nice, France coast" },
+  ];
 
-      {/* Personal section */}
-      <section className="mt-6 grid gap-6 md:grid-cols-2">
+  return (
+    <main className="container mx-auto max-w-6xl px-4 py-10">
+      <h1 className="text-3xl font-semibold">About</h1>
+      <p className="mt-2 max-w-2xl text-gray-300">
+        Golf, running, family time, and travel keep me balanced and curious.
+      </p>
+
+      {/* Rotating photo carousel (local images only) */}
+      <div className="mt-6">
+        <Carousel slides={slides} aspect="16/9" />
+      </div>
+
+      {/* Personal + Travel */}
+      <section className="mt-10 grid gap-6 md:grid-cols-2">
+        {/* Personal section */}
         <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
           <h2 className="text-xl font-medium">A bit about me</h2>
-          <ul className="mt-3 space-y-2 text-gray-200 text-sm">
+          <ul className="mt-3 space-y-2 text-sm text-gray-200">
             <li>Married for 2 years.</li>
             <li>We have <strong>2 cats</strong> and not a single regret.</li>
             <li>“Best uncle in the world” — according to my nieces.</li>
-            <li>I love trying new restaurants and a good <strong>happy hour margarita</strong>.</li>
+            <li>I love trying new restaurants and a solid happy hour margarita.</li>
           </ul>
 
           <h3 className="mt-6 text-sm font-medium text-gray-300">Where I’m based</h3>
-          <p className="text-sm text-gray-400">Washington, D.C • Open to Cloud / Software / DevSecOps roles</p>
+          <p className="text-sm text-gray-400">
+            Washington, D.C. • Open to Cloud / Software / DevSecOps roles
+          </p>
 
           <div className="mt-6 space-x-4 text-sm">
             <a className="underline" href="mailto:devin.a.carmichael@gmail.com">
               Email
             </a>
-            <a
-              className="underline"
-              href="https://www.linkedin.com/in/devin-carmichael"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a className="underline" href="https://www.linkedin.com/in/devin-carmichael" target="_blank" rel="noreferrer">
               LinkedIn
             </a>
-            <a
-              className="underline"
-              href="https://github.com/DCarmichael92"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a className="underline" href="https://github.com/DCarmichael92" target="_blank" rel="noreferrer">
               GitHub
             </a>
           </div>
@@ -63,19 +75,21 @@ export default function AboutPage() {
             ))}
           </div>
 
-          {/* Optional: banner image for travel */}
-          <div className="mt-5 overflow-hidden rounded-xl">
-            <img
-              src="https://source.unsplash.com/featured/1200x400?airplane,window,clouds"
-              alt="Travel banner"
-              className="h-36 w-full object-cover opacity-90"
-              loading="lazy"
+          {/* Local banner image instead of external source */}
+          <div className="mt-5 overflow-hidden rounded-xl relative" style={{ aspectRatio: "3/1" }}>
+            <Image
+              src="/images/travel/nice-france-2.jpg"
+              alt="Coastal view in Nice, France"
+              fill
+              sizes="100vw"
+              className="object-cover"
+              priority={false}
             />
           </div>
         </div>
       </section>
 
-      {/* Hobby cards */}
+      {/* Hobby cards (keeps placeholder fallback if no image in JSON) */}
       <section className="mt-10">
         <h2 className="text-xl font-medium">Hobbies</h2>
         <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">

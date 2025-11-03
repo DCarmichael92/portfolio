@@ -1,0 +1,154 @@
+{
+  "files": [
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Hobbies/5k Run Medals.jpg",
+      "category": "hobbies",
+      "dest": "/mnt/data/public/images/hobbies/5k-run-medals.jpg",
+      "web": "/images/hobbies/5k-run-medals.jpg"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Hobbies/Golf course.jpeg",
+      "category": "hobbies",
+      "dest": "/mnt/data/public/images/hobbies/golf-course.jpeg",
+      "web": "/images/hobbies/golf-course.jpeg"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Profile/2 Cats.jpeg",
+      "category": "cats",
+      "dest": "/mnt/data/public/images/cats/2-cats.jpeg",
+      "web": "/images/cats/2-cats.jpeg"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Profile/Happy Hour.JPG",
+      "category": "family",
+      "dest": "/mnt/data/public/images/family/happy-hour.jpg",
+      "web": "/images/family/happy-hour.jpg"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Profile/Me and Wife 1.jpeg",
+      "category": "family",
+      "dest": "/mnt/data/public/images/family/me-and-wife-1.jpeg",
+      "web": "/images/family/me-and-wife-1.jpeg"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Profile/Me and Wife 2.jpeg",
+      "category": "family",
+      "dest": "/mnt/data/public/images/family/me-and-wife-2.jpeg",
+      "web": "/images/family/me-and-wife-2.jpeg"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Profile/Me and Wife 3.heic",
+      "category": "family",
+      "dest": "/mnt/data/public/images/family/me-and-wife-3.heic",
+      "web": "/images/family/me-and-wife-3.heic"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Travel/Afghanistan Training Coalition Special Operations Forces.JPG",
+      "category": "travel",
+      "dest": "/mnt/data/public/images/travel/afghanistan-training-coalition-special-operations-forces.jpg",
+      "web": "/images/travel/afghanistan-training-coalition-special-operations-forces.jpg"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Travel/Food 1.jpeg",
+      "category": "travel",
+      "dest": "/mnt/data/public/images/travel/food-1.jpeg",
+      "web": "/images/travel/food-1.jpeg"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Travel/Food 2.jpeg",
+      "category": "travel",
+      "dest": "/mnt/data/public/images/travel/food-2.jpeg",
+      "web": "/images/travel/food-2.jpeg"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Travel/Me in Monaco.JPG",
+      "category": "travel",
+      "dest": "/mnt/data/public/images/travel/me-in-monaco.jpg",
+      "web": "/images/travel/me-in-monaco.jpg"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Travel/Monaco, F1 Track.jpeg",
+      "category": "travel",
+      "dest": "/mnt/data/public/images/travel/monaco-f1-track.jpeg",
+      "web": "/images/travel/monaco-f1-track.jpeg"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Travel/Monaco, Friends 1.jpeg",
+      "category": "travel",
+      "dest": "/mnt/data/public/images/travel/monaco-friends-1.jpeg",
+      "web": "/images/travel/monaco-friends-1.jpeg"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Travel/Monaco, Nikki Beach.webp",
+      "category": "travel",
+      "dest": "/mnt/data/public/images/travel/monaco-nikki-beach.webp",
+      "web": "/images/travel/monaco-nikki-beach.webp"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Travel/Nice, France 1.jpg",
+      "category": "travel",
+      "dest": "/mnt/data/public/images/travel/nice-france-1.jpg",
+      "web": "/images/travel/nice-france-1.jpg"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Travel/Nice, France 2.jpg",
+      "category": "travel",
+      "dest": "/mnt/data/public/images/travel/nice-france-2.jpg",
+      "web": "/images/travel/nice-france-2.jpg"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Travel/Nice, France 3.jpg",
+      "category": "travel",
+      "dest": "/mnt/data/public/images/travel/nice-france-3.jpg",
+      "web": "/images/travel/nice-france-3.jpg"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Travel/Nice, France 4.jpg",
+      "category": "travel",
+      "dest": "/mnt/data/public/images/travel/nice-france-4.jpg",
+      "web": "/images/travel/nice-france-4.jpg"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Travel/Nice, France 5.jpg",
+      "category": "travel",
+      "dest": "/mnt/data/public/images/travel/nice-france-5.jpg",
+      "web": "/images/travel/nice-france-5.jpg"
+    },
+    {
+      "src": "/mnt/data/_uploaded_photos/Porfolio Photos/Travel/Nice, France Friends.jpeg",
+      "category": "travel",
+      "dest": "/mnt/data/public/images/travel/nice-france-friends.jpeg",
+      "web": "/images/travel/nice-france-friends.jpeg"
+    }
+  ],
+  "buckets": {
+    "hobbies": [
+      "/images/hobbies/5k-run-medals.jpg",
+      "/images/hobbies/golf-course.jpeg"
+    ],
+    "family": [
+      "/images/family/happy-hour.jpg",
+      "/images/family/me-and-wife-1.jpeg",
+      "/images/family/me-and-wife-2.jpeg",
+      "/images/family/me-and-wife-3.heic"
+    ],
+    "cats": [
+      "/images/cats/2-cats.jpeg"
+    ],
+    "travel": [
+      "/images/travel/afghanistan-training-coalition-special-operations-forces.jpg",
+      "/images/travel/food-1.jpeg",
+      "/images/travel/food-2.jpeg",
+      "/images/travel/me-in-monaco.jpg",
+      "/images/travel/monaco-f1-track.jpeg",
+      "/images/travel/monaco-friends-1.jpeg",
+      "/images/travel/monaco-nikki-beach.webp",
+      "/images/travel/nice-france-1.jpg",
+      "/images/travel/nice-france-2.jpg",
+      "/images/travel/nice-france-3.jpg",
+      "/images/travel/nice-france-4.jpg",
+      "/images/travel/nice-france-5.jpg",
+      "/images/travel/nice-france-friends.jpeg"
+    ]
+  }
+}
