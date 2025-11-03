@@ -1,32 +1,5 @@
 [
-  {
-    "name": "Golf",
-    "blurb": "Weekend rounds; always chasing a cleaner short game.",
-    "image": "https://source.unsplash.com/featured/800x600?golf,course"
-  },
-  {
-    "name": "Lifting",
-    "blurb": "Strength + conditioning 5×/week; focused on consistency.",
-    "image": "https://source.unsplash.com/featured/800x600?weightlifting,gym"
-  },
-  {
-    "name": "TV & Film",
-    "blurb": "Crime dramas and clever comedies; open to recs.",
-    "image": "https://source.unsplash.com/featured/800x600?cinema,film"
-  },
-  {
-    "name": "Travel",
-    "blurb": "I love exploring new places, food, and cultures.",
-    "image": "https://source.unsplash.com/featured/800x600?travel,airplane"
-  },
-  {
-    "name": "Cats",
-    "blurb": "Two cats running the house; I just pay rent.",
-    "image": "https://source.unsplash.com/featured/800x600?cat,pet"
-  },
-  {
-    "name": "Happy Hour",
-    "blurb": "A good margarita and new restaurants with my wife.",
-    "image": "https://source.unsplash.com/featured/800x600?margarita,cocktail"
-  }
+  { "name": "Golf",   "blurb": "Weekend rounds.", "image": "/images/hobbies/golf-course.jpeg" },
+  { "name": "Running","blurb": "5K fun runs.",    "image": "/images/hobbies/5k-run-medals.jpg" },
+  { "name": "Cats",   "blurb": "Bandit & Shadow.","image": "/images/cats/2-cats.jpeg" }
 ]

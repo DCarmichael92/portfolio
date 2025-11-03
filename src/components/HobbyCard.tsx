@@ -1,4 +1,3 @@
-// src/components/HobbyCard.tsx
 "use client";
 import Image from "next/image";
 
@@ -8,13 +7,14 @@ export function HobbyCard({ hobby }: { hobby: Hobby }) {
   return (
     <article className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur">
       {hobby.image && (
-        <div className="relative" style={{ aspectRatio: "4/3" }}>
+        <div className="p-0">
           <Image
             src={hobby.image}
             alt={hobby.name}
-            fill
-            sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-            className="object-cover"
+            width={800}          // explicit size avoids layout issues
+            height={600}
+            className="h-auto w-full object-cover" // scales nicely
+            priority={false}
           />
         </div>
       )}

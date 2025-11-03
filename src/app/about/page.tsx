@@ -66,11 +66,11 @@ export default function AboutPage() {
           {/* Local banner, smaller height */}
           <div className="mt-5 relative h-32 md:h-40 overflow-hidden rounded-xl">
             <Image
-              src="/images/travel/nice-france-2.jpg"
+              src="/images/travel/nice-france-1.jpg"
               alt="Coastal view in Nice, France"
-              fill
-              sizes="100vw"
-              className="object-cover"
+              width={1600}
+              height={533} // ≈ 3:1 aspect
+              className="h-auto w-full object-cover"
             />
           </div>
         </div>
