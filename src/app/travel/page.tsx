@@ -11,6 +11,7 @@ const photos: { src: string; alt: string }[] = [
   { src: "/images/travel/monaco-f1-track.jpeg", alt: "Monaco F1 track" },
   { src: "/images/travel/monaco-nikki-beach.webp", alt: "Nikki Beach Monaco" },
   { src: "/images/travel/monaco-friends-1.jpeg", alt: "Monaco with friends" },
+  { src: "/images/travel/afghanistan-training-coalition-special-operations-forces.jpg", alt: "Afghanistan conducting some drone training" }
   // add more local travel images here…
 ];
 
