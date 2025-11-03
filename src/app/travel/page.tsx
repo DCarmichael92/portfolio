@@ -1,53 +1,53 @@
-"use client";
+// src/app/travel/page.tsx
+import Image from "next/image";
 
-import { useState } from "react";
-import { TravelMap } from "@/components/travel/TravelMap";
-import { TravelGallery } from "@/components/travel/TravelGallery";
-import { TravelStats } from "@/components/travel/TravelStats";
+const photos: { src: string; alt: string }[] = [
+  { src: "/images/travel/me-in-monaco.jpg", alt: "Monaco waterfront" },
+  { src: "/images/travel/nice-france-1.jpg", alt: "Nice, France coast" },
+  { src: "/images/travel/nice-france-2.jpg", alt: "Nice, France streets" },
+  { src: "/images/travel/nice-france-3.jpg", alt: "Nice, France old town" },
+  { src: "/images/travel/nice-france-4.jpg", alt: "Nice, France promenade" },
+  { src: "/images/travel/nice-france-5.jpg", alt: "Nice, France bay" },
+  { src: "/images/travel/monaco-f1-track.jpeg", alt: "Monaco F1 track" },
+  { src: "/images/travel/monaco-nikki-beach.webp", alt: "Nikki Beach Monaco" },
+  { src: "/images/travel/monaco-friends-1.jpeg", alt: "Monaco with friends" },
+  // add more local travel images here…
+];
 
-const TABS = [
-  { key: "map", label: "Map" },
-  { key: "gallery", label: "Gallery" },
-  { key: "stats", label: "Stats" }
-] as const;
-
-type TabKey = typeof TABS[number]["key"];
+export const metadata = {
+  title: "Travel | Devin Carmichael",
+  description: "A few snapshots from places I’ve visited.",
+};
 
 export default function TravelPage() {
-  const [tab, setTab] = useState<TabKey>("map");
-
   return (
     <main className="container mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-3xl font-semibold">Travel Adventures 🌎✈️</h1>
-      <p className="mt-3 max-w-2xl text-gray-300">
-        I love exploring new places, tasting new food, and seeing the world from different perspectives.
-        Some trips were for fun, others were for service — all of them shaped me.
+      <h1 className="text-3xl font-semibold">Travel</h1>
+      <p className="mt-2 max-w-2xl text-gray-300">
+        A few photos from trips that keep me curious and grounded.
       </p>
 
-      {/* Tabs */}
-      <div className="mt-6 flex flex-wrap gap-2">
-        {TABS.map((t) => (
-          <button
-            key={t.key}
-            onClick={() => setTab(t.key)}
-            className={`rounded-full border px-3 py-1 text-sm ${
-              tab === t.key ? "bg-gray-900 text-white dark:bg-white dark:text-black" : "hover:bg-gray-100 dark:hover:bg-zinc-900"
-            }`}
+      <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {photos.map((p, i) => (
+          <figure
+            key={i}
+            className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur"
           >
-            {t.label}
-          </button>
+            {/* For next/image with fill, wrapper must be relative and sized */}
+            <div className="relative" style={{ aspectRatio: "4/3" }}>
+              <Image
+                src={p.src}
+                alt={p.alt}
+                fill
+                sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                className="object-cover"
+                priority={i < 2}
+              />
+            </div>
+            <figcaption className="p-3 text-sm text-gray-300">{p.alt}</figcaption>
+          </figure>
         ))}
       </div>
-
-      <section className="mt-8 space-y-6">
-        {tab === "map" && <TravelMap />}
-        {tab === "gallery" && <TravelGallery />}
-        {tab === "stats" && <TravelStats />}
-      </section>
-
-      <p className="mt-10 text-center text-sm text-gray-400">
-        More places coming soon — passport stays ready.
-      </p>
     </main>
   );
 }

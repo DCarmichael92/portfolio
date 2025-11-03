@@ -1,5 +1,5 @@
+// src/components/HobbyCard.tsx
 "use client";
-
 import Image from "next/image";
 
 type Hobby = { name: string; blurb: string; image?: string };
@@ -13,7 +13,7 @@ export function HobbyCard({ hobby }: { hobby: Hobby }) {
             src={hobby.image}
             alt={hobby.name}
             fill
-            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
             className="object-cover"
           />
         </div>
