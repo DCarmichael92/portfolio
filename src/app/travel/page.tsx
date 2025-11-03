@@ -2,12 +2,12 @@
 import Image from "next/image";
 
 const photos: { src: string; alt: string }[] = [
-  { src: "/images/travel/me-in-monaco.jpg", alt: "Monaco waterfront" },
-  { src: "/images/travel/nice-france-1.jpg", alt: "Nice, France coast" },
-  { src: "/images/travel/nice-france-2.jpg", alt: "Nice, France streets" },
-  { src: "/images/travel/nice-france-3.jpg", alt: "Nice, France old town" },
-  { src: "/images/travel/nice-france-4.jpg", alt: "Nice, France promenade" },
-  { src: "/images/travel/nice-france-5.jpg", alt: "Nice, France bay" },
+  { src: "/images/travel/me-in-monaco.jpg", alt: "South of France. Take me back!" },
+  { src: "/images/travel/nice-france-1.jpg", alt: "The Beach View in Nice was PERFECT" },
+  { src: "/images/travel/nice-france-friends.jpeg", alt: "Cheers!" },
+  { src: "/images/travel/nice-france-3.jpg", alt: "Taking my drone shots from Afghanistan to France" },
+  { src: "/images/travel/nice-france-4.jpg", alt: "Cool Sign in France.. idk" },
+  { src: "/images/travel/nice-france-5.jpg", alt: "Cool Street" },
   { src: "/images/travel/monaco-f1-track.jpeg", alt: "Monaco F1 track" },
   { src: "/images/travel/monaco-nikki-beach.webp", alt: "Nikki Beach Monaco" },
   { src: "/images/travel/monaco-friends-1.jpeg", alt: "Monaco with friends" },
