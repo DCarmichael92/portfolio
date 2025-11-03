@@ -5,27 +5,62 @@ import { useEffect, useMemo, useState } from "react";
 import placesData from "@/data/travel-places.json";
 import { Lightbox } from "./Lightbox";
 
-/** Parse the viewBox from an SVG string (e.g., "0 0 2000 1000") */
+/** Try to read the viewBox from the SVG file; defaults to 2048x1024 (2:1) */
 function parseViewBox(svgText: string) {
-  const m = svgText.match(/viewBox=["']\s*([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s*["']/i);
-  if (!m) return { minX: 0, minY: 0, width: 2000, height: 1000 }; // fallback 2:1
-  const [, minX, minY, width, height] = m.map(Number) as unknown as [string, number, number, number, number];
+  const m = svgText.match(
+    /viewBox=["']\s*([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s*["']/i
+  );
+  if (!m) return { minX: 0, minY: 0, width: 2048, height: 1024 };
+  const [, a, b, c, d] = m;
+  const minX = parseFloat(a);
+  const minY = parseFloat(b);
+  const width = parseFloat(c);
+  const height = parseFloat(d);
+  if (!Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0) {
+    return { minX: 0, minY: 0, width: 2048, height: 1024 };
+  }
   return { minX, minY, width, height };
 }
 
-/** Equirectangular (Plate Carrée) projection using the SVG viewBox width/height */
-function project(lat: number, lon: number, width: number, height: number) {
-  const x = ((lon + 180) / 360) * width;
-  const y = ((90 - lat) / 180) * height;
-  return { x, y };
+/**
+ * Equirectangular (Plate Carrée) projection.
+ * We include a calibration window so you can nudge alignment if your SVG
+ * has padding/margins or isn’t exactly -180..180 / -90..90.
+ */
+function projector({
+  width,
+  height,
+  lonMin = -180,
+  lonMax = 180,
+  latMin = -90,
+  latMax = 90,
+  dx = 0,
+  dy = 0,
+}: {
+  width: number;
+  height: number;
+  lonMin?: number;
+  lonMax?: number;
+  latMin?: number;
+  latMax?: number;
+  dx?: number; // extra pixel offset X
+  dy?: number; // extra pixel offset Y
+}) {
+  const lonSpan = lonMax - lonMin;
+  const latSpan = latMax - latMin;
+  return (lat: number, lon: number) => {
+    const x = ((lon - lonMin) / lonSpan) * width + dx;
+    const y = ((latMax - lat) / latSpan) * height + dy;
+    return { x, y };
+  };
 }
 
 type Place = {
   slug: string;
   name: string;
   country: string;
-  lat: number;
-  lng: number;
+  lat: number; // latitude  -90..90
+  lng: number; // longitude -180..180
   year: number;
   visits: number;
   images: string[];
@@ -33,13 +68,17 @@ type Place = {
 };
 
 export function TravelMap() {
-  const [svgMarkup, setSvgMarkup] = useState<string | null>(null);
-  const [vb, setVb] = useState<{ minX: number; minY: number; width: number; height: number } | null>(null);
+  const [vb, setVb] = useState<{ minX: number; minY: number; width: number; height: number }>({
+    minX: 0,
+    minY: 0,
+    width: 2048,
+    height: 1024,
+  });
+  const [svgReady, setSvgReady] = useState(false);
   const [active, setActive] = useState<Place | null>(null);
-
   const places = useMemo(() => placesData as Place[], []);
 
-  // Load the SVG once (from /public/maps/world-map.svg), parse viewBox
+  // 1) Read the SVG viewBox so our pins share the exact same coordinate space
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -47,12 +86,12 @@ export function TravelMap() {
         const res = await fetch("/maps/world-map.svg");
         const text = await res.text();
         if (cancelled) return;
-        setSvgMarkup(text);
-        setVb(parseViewBox(text));
+        const parsed = parseViewBox(text);
+        setVb(parsed);
+        setSvgReady(true);
       } catch {
-        // fallback if fetch fails
-        setSvgMarkup(null);
-        setVb({ minX: 0, minY: 0, width: 2000, height: 1000 });
+        // use defaults
+        setSvgReady(true);
       }
     })();
     return () => {
@@ -60,95 +99,132 @@ export function TravelMap() {
     };
   }, []);
 
-  const box = vb ?? { minX: 0, minY: 0, width: 2000, height: 1000 };
+  // 2) Calibration: tweak if any region looks slightly off on your SVG.
+  // Most maps won't need changes. If Europe or the poles look shifted,
+  // adjust lonMin/lonMax/latMin/latMax or add dx/dy (in pixels).
+  const calibration = {
+    lonMin: -180,
+    lonMax: 180,
+    latMin: -90,
+    latMax: 90,
+    dx: 0,
+    dy: 0,
+  };
+
+  const project = projector({
+    width: vb.width,
+    height: vb.height,
+    ...calibration,
+  });
+
+  // 3) Visual constants
+  const oceanTop = "#0b1220";
+  const oceanBottom = "#0a0f1a";
 
   return (
     <>
-      {/* Responsive wrapper: SVG scales via viewBox, pins stay aligned */}
-      <div className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-[#0b1220]">
-        <div className="relative" style={{ aspectRatio: `${box.width}/${box.height}` }}>
+      {/* Responsive wrapper preserves aspect ratio based on the map viewBox */}
+      <div className="relative w-full overflow-hidden rounded-2xl border border-white/10">
+        <div className="relative" style={{ aspectRatio: `${vb.width}/${vb.height}` }}>
           <svg
-            viewBox={`${box.minX} ${box.minX} ${box.width} ${box.height}`}
+            viewBox={`${vb.minX} ${vb.minY} ${vb.width} ${vb.height}`}
             className="h-full w-full"
             xmlns="http://www.w3.org/2000/svg"
             role="img"
             aria-label="World map with visited locations"
           >
             <defs>
-              {/* ocean gradient */}
-              <linearGradient id="ocean" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stopColor="#0b1220" />
-                <stop offset="100%" stopColor="#0a0f1a" />
+              {/* Ocean gradient */}
+              <linearGradient id="ocean-grad" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stopColor={oceanTop} />
+                <stop offset="100%" stopColor={oceanBottom} />
               </linearGradient>
-              {/* punch-up filter for the embedded SVG map */}
-              <filter id="landPunch">
-                <feComponentTransfer>
-                  <feFuncR type="linear" slope="1.15" />
-                  <feFuncG type="linear" slope="1.15" />
-                  <feFuncB type="linear" slope="1.15" />
-                </feComponentTransfer>
-                <feGaussianBlur stdDeviation="0.3" result="blur" />
-                <feMerge>
-                  <feMergeNode in="SourceGraphic" />
-                  <feMergeNode in="blur" />
-                </feMerge>
-              </filter>
-              {/* subtle grid pattern for graticule */}
-              <pattern id="graticule" width={box.width / 12} height={box.height / 6} patternUnits="userSpaceOnUse">
-                <path d={`M ${box.width / 12} 0 V ${box.height}`} stroke="#9ca3af" strokeOpacity="0.12" strokeWidth="1" />
-                <path d={`M 0 ${box.height / 6} H ${box.width}`} stroke="#9ca3af" strokeOpacity="0.12" strokeWidth="1" />
+
+              {/* Graticule pattern (lat/lon lines) */}
+              <pattern
+                id="graticule"
+                patternUnits="userSpaceOnUse"
+                width={vb.width / 12}
+                height={vb.height / 6}
+              >
+                <path
+                  d={`M ${vb.width / 12} 0 V ${vb.height}`}
+                  stroke="#9ca3af"
+                  strokeOpacity="0.12"
+                  strokeWidth="1"
+                />
+                <path
+                  d={`M 0 ${vb.height / 6} H ${vb.width}`}
+                  stroke="#9ca3af"
+                  strokeOpacity="0.12"
+                  strokeWidth="1"
+                />
               </pattern>
             </defs>
 
-            {/* ocean background */}
-            <rect x={box.minX} y={box.minY} width={box.width} height={box.height} fill="url(#ocean)" />
+            {/* Ocean + subtle graticule */}
+            <rect
+              x={vb.minX}
+              y={vb.minY}
+              width={vb.width}
+              height={vb.height}
+              fill="url(#ocean-grad)"
+            />
+            <rect
+              x={vb.minX}
+              y={vb.minY}
+              width={vb.width}
+              height={vb.height}
+              fill="url(#graticule)"
+            />
 
-            {/* graticule */}
-            <rect x={box.minX} y={box.minY} width={box.width} height={box.height} fill="url(#graticule)" />
-
-            {/* embed your uploaded SVG map as an <image>, full viewBox */}
-            {svgMarkup ? (
+            {/* Your uploaded map drawn as an <image> so we keep its original vector styling */}
+            {svgReady && (
               <image
                 href="/maps/world-map.svg"
-                x={box.minX}
-                y={box.minY}
-                width={box.width}
-                height={box.height}
+                x={vb.minX}
+                y={vb.minY}
+                width={vb.width}
+                height={vb.height}
                 preserveAspectRatio="xMidYMid meet"
                 style={{
+                  // Gentle clarity boost so coasts/lines pop over the ocean
                   filter:
-                    "contrast(1.25) brightness(1.18) saturate(1.1) drop-shadow(0 0 2px rgba(255,255,255,0.25))",
+                    "contrast(1.2) brightness(1.12) saturate(1.05) drop-shadow(0 0 1.5px rgba(255,255,255,0.2))",
                 }}
               />
-            ) : null}
+            )}
 
-            {/* pins layer */}
+            {/* Pins */}
             <g>
               {places.map((p) => {
+                const { x, y } = project(p.lat, p.lng);
                 const hasImgs = Array.isArray(p.images) && p.images.length > 0;
-                const { x, y } = project(p.lat, p.lng, box.width, box.height);
 
                 return (
                   <g key={p.slug} transform={`translate(${x}, ${y})`}>
-                    {/* clickable hit area */}
-                    <a onClick={() => hasImgs && setActive(p)} style={{ cursor: hasImgs ? "pointer" : "default" }}>
+                    {/* Clickable area */}
+                    <a
+                      onClick={() => hasImgs && setActive(p)}
+                      style={{ cursor: hasImgs ? "pointer" : "default" }}
+                    >
                       {/* outer ring */}
                       <circle
                         r={5}
                         fill={hasImgs ? "#34d399" : "#9ca3af"}
-                        stroke={hasImgs ? "rgba(167, 243, 208, 0.6)" : "rgba(209, 213, 219, 0.5)"}
+                        stroke={hasImgs ? "rgba(167,243,208,0.55)" : "rgba(209,213,219,0.5)"}
                         strokeWidth={3}
                       />
-                      {/* center dot */}
+                      {/* center */}
                       <circle r={2} fill="#0b1220" />
-                      {/* label on large screens */}
+                      {/* label (desktop only to reduce clutter) */}
                       <text
                         x={8}
                         y={4}
                         fontSize={12}
-                        fill="rgba(255,255,255,0.85)"
-                        style={{ userSelect: "none" }}
+                        fill="rgba(255,255,255,0.88)"
                         className="hidden md:inline"
+                        style={{ userSelect: "none" }}
                       >
                         {p.name}
                       </text>
@@ -161,7 +237,7 @@ export function TravelMap() {
         </div>
       </div>
 
-      {/* Lightbox only when we have images */}
+      {/* Lightbox for photos (only when they exist) */}
       <Lightbox
         open={!!active && Array.isArray(active?.images) && active.images.length > 0}
         onClose={() => setActive(null)}
